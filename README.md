@@ -156,3 +156,8 @@ static/           the web app (plain HTML/CSS/JS modules in static/js, no build 
 ```bash
 .venv/bin/python -m pytest -q
 ```
+
+## License
+
+MIT (see `LICENSE`). The CMU Pronouncing Dictionary in `data/phonics/` keeps its own BSD licence
+(`data/phonics/LICENSE`).

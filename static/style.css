@@ -73,7 +73,7 @@ form { display: flex; flex-direction: column; gap: 14px; }
 .screen.wide { max-width: 100%; }
 #app:has(#aquarium:not([hidden])) { max-width: 960px; }
 .appbar { position: sticky; top: 0; z-index: 15; display: flex; justify-content: space-between; align-items: center;
-  gap: 8px; margin: -24px -16px 0; padding: 12px 16px; background: var(--bg); }
+  gap: 8px; margin: -24px -16px 12px; padding: 12px 16px; background: var(--bg); }   /* bottom margin: room for the today ring on the week dots */
 .appbar .coin-pill { margin-left: auto; position: relative; }
 .coin-pill.bump { animation: coin-bump .35s ease-out; }
 @keyframes coin-bump { 40% { transform: scale(1.15); } }
