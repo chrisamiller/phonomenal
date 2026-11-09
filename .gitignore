@@ -1,0 +1,32 @@
+# Python / tooling
+.venv/
+__pycache__/
+.pytest_cache/
+.DS_Store
+
+# Personal data: her words, answers, writing, credits. Live data is in Firestore.
+data/db.json
+data/db.json.tmp
+data/db.backup-*.json
+data/secret_key
+backups/
+migrate.json
+restored.json
+spelling-backup-*.json
+*.json.tmp
+
+# Generated audio (lives in the Cloud Storage bucket) and old copies
+data/media/
+data/phonics_sounds.backup-*
+# Sound-match clips: kept in the media bucket (gs://…-spelling-media/phonics_sounds) and on this Mac
+phonics_sounds/
+
+# Source material: personal and third-party word lists, decks, voice samples
+anki_data/
+word_lists/
+tts_samples/
+tmp/
+/*.csv
+
+# Deploy settings (project ID); see deploy.env.example
+deploy.env

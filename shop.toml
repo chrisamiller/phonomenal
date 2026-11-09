@@ -1,0 +1,203 @@
+# Aquarium shop. Prices are in credits; change freely (the economy report on the
+# progress page shows how fast credits are earned). `category` decides where an item
+# lives: fish swim, coral/decor sit on the sand, tank items change the tank itself.
+
+[tank]
+capacity = 15         # items allowed in the tank
+big_capacity = 30     # after buying the bigger tank
+
+# --- Fish ---
+[[item]]
+id = "guppy"
+name = "Guppy"
+category = "fish"
+price = 40
+
+[[item]]
+id = "neon-tetra"
+name = "Neon Tetra"
+category = "fish"
+price = 40
+
+[[item]]
+id = "goldfish"
+name = "Goldfish"
+category = "fish"
+price = 60
+
+[[item]]
+id = "clownfish"
+name = "Clownfish"
+category = "fish"
+price = 80
+
+[[item]]
+id = "blue-tang"
+name = "Blue Tang"
+category = "fish"
+price = 100
+
+[[item]]
+id = "angelfish"
+name = "Angelfish"
+category = "fish"
+price = 100
+
+[[item]]
+id = "pufferfish"
+name = "Pufferfish"
+category = "fish"
+price = 120
+
+[[item]]
+id = "seahorse"
+name = "Seahorse"
+category = "fish"
+price = 140
+
+[[item]]
+id = "jellyfish"
+name = "Jellyfish"
+category = "fish"
+price = 180
+
+[[item]]
+id = "sea-turtle"
+name = "Sea Turtle"
+category = "fish"
+price = 240
+
+[[item]]
+id = "octopus"
+name = "Octopus"
+category = "fish"
+price = 240
+
+[[item]]
+id = "whale-shark"
+name = "Whale Shark"
+category = "fish"
+price = 600
+
+# --- Coral & plants ---
+[[item]]
+id = "seaweed"
+name = "Seaweed"
+category = "coral"
+price = 30
+
+[[item]]
+id = "brain-coral"
+name = "Brain Coral"
+category = "coral"
+price = 60
+
+[[item]]
+id = "fan-coral"
+name = "Fan Coral"
+category = "coral"
+price = 70
+
+[[item]]
+id = "staghorn-coral"
+name = "Staghorn Coral"
+category = "coral"
+price = 80
+
+[[item]]
+id = "anemone"
+name = "Anemone"
+category = "coral"
+price = 90
+
+[[item]]
+id = "kelp-forest"
+name = "Kelp Forest"
+category = "coral"
+price = 120
+
+# --- Decorations ---
+[[item]]
+id = "pebbles"
+name = "Pebbles"
+category = "decor"
+price = 20
+
+[[item]]
+id = "starfish"
+name = "Starfish"
+category = "decor"
+price = 50
+
+[[item]]
+id = "bubbler"
+name = "Bubbling Clam"
+category = "decor"
+price = 80
+
+[[item]]
+id = "treasure-chest"
+name = "Treasure Chest"
+category = "decor"
+price = 100
+
+[[item]]
+id = "diver"
+name = "Diver"
+category = "decor"
+price = 120
+
+[[item]]
+id = "crystals"
+name = "Glowing Crystals"
+category = "decor"
+price = 160
+
+[[item]]
+id = "castle"
+name = "Castle"
+category = "decor"
+price = 240
+
+[[item]]
+id = "sunken-ship"
+name = "Sunken Ship"
+category = "decor"
+price = 300
+
+# --- Tank upgrades (one each) ---
+[[item]]
+id = "big-tank"
+name = "Bigger Tank"
+category = "tank"
+price = 400
+
+[[item]]
+id = "sand-pink"
+name = "Pink Sand"
+category = "tank"
+price = 60
+
+[[item]]
+id = "sand-black"
+name = "Black Sand"
+category = "tank"
+price = 60
+
+[[item]]
+id = "bg-reef"
+name = "Coral Reef Background"
+category = "tank"
+price = 100
+
+[[item]]
+id = "bg-deep"
+name = "Deep Sea Background"
+category = "tank"
+price = 100
+
+[[item]]
+id = "bg-lagoon"
+name = "Lagoon Background"
+category = "tank"
+price = 100

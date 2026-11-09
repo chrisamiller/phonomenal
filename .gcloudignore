@@ -1,0 +1,24 @@
+# What `gcloud builds submit` leaves out of the upload (it ignores .dockerignore).
+# Keep in step with .dockerignore. data/phonics IS needed: the Dockerfile copies it.
+.gcloudignore
+.venv/
+.git/
+**/__pycache__/
+.pytest_cache/
+data/db.json
+data/db.json.tmp
+data/db.backup-*.json
+data/phonics_sounds.backup-*
+phonics_sounds/
+data/media/
+data/secret_key
+tts_samples/
+anki_data/
+word_lists/
+tests/
+*.json.tmp
+spelling-backup-*.json
+migrate.json
+restored.json
+tmp/
+deploy.env

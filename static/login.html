@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · Phonomenal</title>
+  <meta name="theme-color" content="#2f6f6a">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    .login { max-width: 420px; margin: 8vh auto 0; display: flex; flex-direction: column; gap: 16px; text-align: center; }
+    .login-icon { font-size: 4rem; line-height: 1; }
+    .login-brand { margin: 0; font-size: 1.1rem; font-weight: 700; letter-spacing: .08em; color: var(--primary); }
+    .login form { display: flex; flex-direction: column; gap: 14px; text-align: left; }
+    .login label { display: flex; flex-direction: column; gap: 6px; font-weight: 500; }
+    .login input { font: inherit; font-size: 1.3rem; padding: 12px 14px; border-radius: 12px;
+      border: 2px solid var(--line); background: var(--card); color: var(--ink); }
+    .login input:focus { outline: 3px solid var(--hl); outline-offset: 1px; }
+    .login .note { min-height: 1.4em; margin: 0; }
+  </style>
+</head>
+<body>
+<main id="app">
+  <section class="screen login">
+    <div class="login-icon">🐠</div>
+    <p class="login-brand">Phonomenal</p>
+    <h1>Welcome back!</h1>
+    <form id="login-form" autocomplete="on">
+      <label>Name
+        <input id="username" name="username" autocomplete="username" autocapitalize="words" spellcheck="false" required>
+      </label>
+      <label>Password
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+      </label>
+      <p class="note" id="login-error" role="alert"></p>
+      <button class="big primary" type="submit">Let's go</button>
+    </form>
+  </section>
+</main>
+<script>
+const form = document.getElementById("login-form");
+const error = document.getElementById("login-error");
+document.getElementById("username").focus();
+form.onsubmit = async (e) => {
+  e.preventDefault();
+  error.textContent = "";
+  const res = await fetch("/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username: form.username.value, password: form.password.value }),
+  });
+  if (res.ok) {
+    const next = new URLSearchParams(location.search).get("next") || "/";
+    location.href = next.startsWith("/") && !next.startsWith("//") ? next : "/";   // only same-site pages
+  } else {
+    error.textContent = (await res.json().catch(() => ({}))).detail || "Something went wrong. Try again!";
+    form.password.select();
+  }
+};
+</script>
+</body>
+</html>

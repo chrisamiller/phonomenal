@@ -1,0 +1,2 @@
+# Only needed on Cloud Run with the Firestore store (docs/deploy-gcp.md).
+google-cloud-firestore==2.34.1

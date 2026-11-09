@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phonomenal</title>
+  <meta name="theme-color" content="#2f6f6a">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<main id="app">
+
+  <!-- ============ HEADER (every screen) ============ -->
+  <header class="appbar">
+    <div class="topbar-right" id="home-links">
+      <button id="open-trophies" class="icon-btn" aria-label="Trophies">🏆</button>
+      <button id="open-aquarium" class="icon-btn" aria-label="Aquarium">🐠</button>
+    </div>
+    <span id="credits-pill" class="pill coin-pill" title="Credits" aria-live="polite">🪙 <span id="balance">…</span></span>
+  </header>
+
+  <!-- ============ HOME / MISSION ============ -->
+  <section id="home" class="screen">
+
+    <div class="week">
+      <div class="week-dots" id="week-dots"></div>
+      <p class="muted" id="week-text"></p>
+    </div>
+
+    <h1 id="mission-title">Today's mission</h1>
+    <div id="choose" hidden>
+      <p>Spelling, plus pick <span id="choose-range">1 or 2</span>:</p>
+      <div class="choice-cards" id="extra-cards"></div>
+      <button id="choose-go" class="big primary" disabled>Let's go</button>
+    </div>
+    <div id="mission-list" class="mission-list" hidden></div>
+    <p id="mission-done" class="celebrate" hidden>🎉 Mission complete! Play again for bonus credits, or see you tomorrow.</p>
+  </section>
+
+  <!-- ============ SPELLING ============ -->
+  <section id="quiz" class="screen" hidden>
+    <div class="progress"><div id="bar"></div></div>
+    <p id="rematch-badge" class="badge" hidden>⚔️ Rematch!</p>
+    <div class="listen">
+      <button id="play-word" class="sound">🔊 Hear the word</button>
+      <button id="play-sentence" class="sound" hidden>💬 Hear a sentence</button>
+    </div>
+    <p id="sentence" class="sentence" hidden></p>
+    <form id="answer-form" autocomplete="off">
+      <input id="answer" class="spell" type="text" name="spell-x" autocomplete="off" autocorrect="off"
+             autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-label="Type the word">
+      <button class="big primary" type="submit">Check</button>
+    </form>
+
+    <div id="right" class="feedback good" hidden>
+      <p class="headline">✓ Yes! <span class="word" id="right-word"></span></p>
+      <p id="case-note" class="note" hidden></p>
+      <p>How did that feel?</p>
+      <div class="choices">
+        <button data-choice="easy">😎<br>Easy</button>
+        <button data-choice="little_hard">🤔<br>A little hard</button>
+        <button data-choice="guessed">🎲<br>I guessed</button>
+      </div>
+    </div>
+
+    <div id="practice-ok" class="feedback good" hidden>
+      <p class="headline">✓ Got it! <span class="word" id="practice-word"></span></p>
+      <button class="big primary" id="practice-next">Next</button>
+    </div>
+
+    <div id="wrong" class="feedback gentle" hidden>
+      <p class="headline">Nearly! Here's how it's spelled:</p>
+      <p class="word letters" id="letters"></p>
+      <p class="muted">You wrote: <span id="typed"></span></p>
+      <div id="cover-steps">
+        <p>Look at it. Say the letters out loud. Then cover it and write it.</p>
+        <button class="big primary" id="cover">Cover &amp; write</button>
+      </div>
+      <button class="big primary" id="wrong-next" hidden>Next</button>
+    </div>
+
+    <form id="cover-form" class="feedback gentle" autocomplete="off" hidden>
+      <p class="headline">Now write it from memory</p>
+      <input id="cover-answer" class="spell" type="text" name="spell-y" autocomplete="off" autocorrect="off"
+             autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-label="Write the word">
+      <button class="big primary" type="submit">Check</button>
+    </form>
+  </section>
+
+  <!-- ============ ACTIVITY DONE ============ -->
+  <section id="done" class="screen" hidden>
+    <h1 id="done-title">Great work! 🎉</h1>
+    <p class="summary" id="summary"></p>
+    <ul id="done-list" class="stars"></ul>
+    <p id="done-credits" class="done-credits" hidden></p>
+    <div id="done-awards" class="done-awards"></div>
+    <button id="done-home" class="big primary">Back to my mission</button>
+  </section>
+
+  <!-- ============ WRITING ============ -->
+  <section id="writing" class="screen" hidden>
+    <button class="back" data-home>← Mission</button>
+    <div class="prompt-card"><p id="prompt-text"></p></div>
+    <textarea id="writing-text" rows="8" autocomplete="off" autocorrect="off" autocapitalize="sentences"
+              spellcheck="false" aria-label="Your answer" placeholder="Write 3 or 4 sentences…"></textarea>
+    <div class="writing-foot">
+      <span id="sentence-dots" class="sentence-dots" aria-live="polite"></span>
+      <button id="writing-done" class="big primary" disabled>Done</button>
+    </div>
+    <p id="writing-already" class="celebrate" hidden>✓ You already wrote today. Nice!</p>
+  </section>
+
+  <!-- ============ SOUND SPLITTING ============ -->
+  <section id="split" class="screen" hidden>
+    <button class="back" data-home>← Mission</button>
+    <div class="progress"><div id="split-bar"></div></div>
+    <div class="split-word" id="split-word"></div>
+
+    <div id="count-step">
+      <p class="headline">How many sounds?</p>
+      <div class="count-buttons" id="count-buttons"></div>
+    </div>
+    <div id="count-feedback" class="feedback" hidden></div>
+
+    <div id="split-step" hidden>
+      <p class="headline">Tap between letters to split the sounds</p>
+      <div class="tiles" id="tiles"></div>
+      <button id="split-check" class="big primary">Check</button>
+    </div>
+    <div id="split-feedback" class="feedback" hidden>
+      <p class="headline" id="split-result"></p>
+      <div id="split-yours" hidden>
+        <p class="answer-label">You split it:</p>
+        <div class="tiles answer" id="split-yours-tiles"></div>
+        <p class="answer-label">The right way:</p>
+      </div>
+      <div class="tiles answer" id="split-answer"></div>
+      <button id="split-next" class="big primary">Next</button>
+    </div>
+  </section>
+
+  <!-- ============ SOUND MATCH ============ -->
+  <section id="match" class="screen" hidden>
+    <button class="back" data-home>← Mission</button>
+    <div class="progress"><div id="match-bar"></div></div>
+    <p class="headline">Tap every word with this sound:</p>
+    <div class="listen">
+      <button id="match-play" class="sound">🔊 Play the sound</button>
+      <button id="match-hint" class="sound">💡 Hint</button>
+    </div>
+    <p id="match-hint-text" class="note" hidden></p>
+    <div class="word-cards" id="match-cards"></div>
+    <button id="match-check" class="big primary">Check</button>
+    <div id="match-feedback" class="feedback" hidden>
+      <p class="headline" id="match-result"></p>
+      <p id="match-note"></p>
+      <button id="match-next" class="big primary">Next</button>
+    </div>
+  </section>
+
+  <!-- ============ AQUARIUM ============ -->
+  <section id="aquarium" class="screen wide" hidden>
+    <button class="back" data-home>← Mission</button>
+    <h1 id="aq-name">My Aquarium</h1>
+    <div id="tank" class="tank"></div>
+    <p class="muted" id="aq-capacity"></p>
+    <p class="muted aq-hint">Tap the water to feed your fish. Tap a fish to say hello.</p>
+    <div class="aq-toolbar">
+      <button id="aq-shop" class="primary">🛍️ Shop</button>
+      <button id="aq-move">✋ Move things</button>
+      <button id="aq-night">🌙 Night-time</button>
+      <button id="aq-gallery">🖼️ Gallery</button>
+      <button id="aq-new">✨ New tank</button>
+    </div>
+  </section>
+
+  <!-- ============ TROPHIES ============ -->
+  <section id="trophies" class="screen" hidden>
+    <button class="back" data-home>← Mission</button>
+    <h1>Trophies</h1>
+    <p class="muted" id="trophy-count"></p>
+    <p class="muted" id="trophy-empty" hidden>No trophies yet. Finish today's mission to earn your first one!</p>
+    <div class="trophy-grid" id="trophy-grid"></div>
+  </section>
+
+</main>
+
+<!-- Shop / gallery / dialogs -->
+<div id="sheet" class="sheet" hidden>
+  <div class="sheet-panel">
+    <div class="sheet-head">
+      <h2 id="sheet-title"></h2>
+      <button id="sheet-close" class="icon-btn" aria-label="Close">✕</button>
+    </div>
+    <div id="sheet-tabs" class="tabs"></div>
+    <div id="sheet-body" class="sheet-body"></div>
+  </div>
+</div>
+
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<script type="module" src="/static/js/main.js"></script>
+</body>
+</html>

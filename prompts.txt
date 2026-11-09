@@ -1,0 +1,114 @@
+# Writing prompts: one per line. Delete or edit any you don't want; lines starting with # are ignored.
+# Each should be answerable in 3-4 sentences.
+
+# Imagine / what if
+If you could have any superpower for one day, what would you do with it?
+Invent a new holiday. What is it called, and how do people celebrate it?
+If you could talk to one kind of animal, which would you pick and what would you ask it?
+Describe your dream bedroom. What would be in it?
+If you could live inside any book, movie, or game, which would it be and why?
+You find a door in your house that wasn't there yesterday. What's behind it?
+If you could design a new school subject, what would students learn?
+What would you do if you were invisible for an afternoon?
+Invent a gadget that would make mornings easier. How does it work?
+If you could visit any planet, which one would you choose and what would you pack?
+You get to plan a perfect Saturday with no limits. What do you do?
+If your pet (or a pet you'd like to have) could write a diary, what would today's entry say?
+Imagine you are the principal for one day. What changes would you make?
+If you could shrink to the size of an ant, where would you explore first?
+You wake up and you are 30 years old. What does your day look like?
+Describe a new flavor of ice cream you would invent.
+If you could build a treehouse with anything you wanted, what would it have?
+Invent a new sport. What are the rules?
+If you could be any animal for a week, what would you be and why?
+You are given a robot helper. What jobs would you give it?
+If you could open any kind of shop, what would you sell?
+You find a map that leads to treasure in your town. Where does it lead?
+If you could swap lives with someone for a day, who would it be?
+Describe a creature that lives at the bottom of the ocean that no one has discovered yet.
+If you could make one rule that everyone in the world had to follow, what would it be?
+
+# Opinions
+What is the best season of the year, and why?
+Should kids have homework on weekends? Explain your opinion.
+Is it better to be a morning person or a night person? Why?
+Which is better: cats or dogs? Give at least two reasons.
+Should every school have a garden? Why or why not?
+What is the most useful invention ever made? Explain.
+Is it better to read the book or watch the movie first?
+Should video games count as a sport? Why or why not?
+What is the best pizza topping, and why are you right?
+Would you rather live in the city or the countryside? Why?
+Should students be allowed to choose their own seats in class?
+What is the most underrated food?
+Is it better to have one best friend or a lot of friends?
+Should school start later in the morning? Explain.
+What makes a good teacher?
+What is the best way to spend a rainy day?
+Should everyone learn to cook? Why or why not?
+What is the hardest job in the world, and why?
+Would you rather be really good at one thing or pretty good at many things?
+Is it more fun to plan a trip or to actually go on it?
+
+# Would you rather
+Would you rather be able to fly or breathe underwater? Explain.
+Would you rather visit the past or the future? Where would you go?
+Would you rather have a pet dragon or a pet unicorn? Why?
+Would you rather live in a castle or a spaceship?
+Would you rather never be too hot or never be too cold?
+Would you rather be able to speak every language or play every instrument?
+Would you rather explore a jungle or a desert?
+Would you rather have a rewind button or a pause button for your life?
+Would you rather be the funniest person in the room or the smartest?
+Would you rather spend a day at an amusement park or a water park?
+
+# About you
+What is something you are really good at? How did you get good at it?
+Describe a time you were proud of yourself.
+What is your favorite way to relax after a long day?
+What is something new you would like to learn this year?
+Describe your favorite place to be. What makes it special?
+What is a goal you have for this year, and how will you reach it?
+Tell about a time you tried something new. How did it go?
+What is your favorite memory from last summer?
+What are three things that always make you smile?
+Who is someone you admire, and why?
+What is the best gift you have ever given someone?
+Describe a time you helped someone.
+What is a skill you think every person should have?
+What is your favorite book or series, and why should someone read it?
+If you could have dinner with any character from a book or movie, who would it be?
+What is something that is hard for you but that you keep working on?
+Describe your perfect breakfast.
+What is a tradition your family has that you enjoy?
+What would you like to be when you grow up, and why?
+What is a song that always puts you in a good mood? Why?
+
+# Explain / describe
+Explain how to make your favorite snack, step by step.
+Describe your favorite animal to someone who has never seen it.
+Explain the rules of your favorite game.
+Describe what you see out the nearest window.
+Explain how to be a good friend.
+Describe the best day you can remember.
+Explain why sleep is important.
+Describe a storm using all five senses.
+Explain how to take care of a pet.
+Describe your town to someone who has never been there.
+Explain something you know a lot about.
+Describe a meal you would cook for your family.
+Explain what you would pack for a week-long camping trip.
+Describe the inside of a spaceship.
+Explain how you would teach someone to ride a bike.
+
+# Quick questions
+What is the best snack to eat after school, and why?
+What is one thing that always makes you laugh?
+Which animal would make the worst pet? Why?
+What is your favorite thing to do on a snow day (or a really hot day)?
+What is one food you used to hate but now like (or the other way around)?
+What is the best thing that happened to you this week?
+If you could add one room to your house, what would it be?
+What is your favorite color, and what does it remind you of?
+What is one thing you would never want to give up?
+What is the coolest animal fact you know?

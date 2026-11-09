@@ -1,0 +1,11 @@
+{
+  "name": "Phonomenal",
+  "short_name": "Phonomenal",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbf7ee",
+  "theme_color": "#2f6f6a",
+  "icons": [
+    { "src": "/static/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

@@ -1,0 +1,51 @@
+sound	file	phoneme_parts	letters	examples	section
+/b/	b.mp3	b	b	bat, bed, bus	Single consonant sounds
+/k/	k.mp3	k	c / k	cat, kick, cup	Single consonant sounds
+/d/	d.mp3	d	d	dog, dig, mud	Single consonant sounds
+/f/	f.mp3	f	f	fan, fit, off	Single consonant sounds
+/g/	g.mp3	ɡ	g	get, big, gap	Single consonant sounds
+/h/	h.mp3	h	h	hat, hop, him	Single consonant sounds
+/dʒ/	j.mp3	dʒ	j	jam, jet, jug	Single consonant sounds
+/l/	l.mp3	l	l	lip, let, hill	Single consonant sounds
+/m/	m.mp3	m	m	man, map, him	Single consonant sounds
+/n/	n.mp3	n	n	nap, net, run	Single consonant sounds
+/p/	p.mp3	p	p	pin, pet, tap	Single consonant sounds
+/r/	r.mp3	r	r	run, red, car	Single consonant sounds
+/s/	s.mp3	s	s	sun, sit, bus	Single consonant sounds
+/t/	t.mp3	t	t	tap, ten, bat	Single consonant sounds
+/v/	v.mp3	v	v	van, vet, give	Single consonant sounds
+/w/	w.mp3	w	w	win, wet, we	Single consonant sounds
+/ks/	ks.mp3	k + s	x	fox, box, mix	Single consonant sounds
+/j/	y.mp3	j	y	yes, yam, yet	Single consonant sounds
+/z/	z.mp3	z	z	zip, zap, buzz	Single consonant sounds
+/ʃ/	sh.mp3	ʃ	sh	ship, fish, shop	Consonant digraphs (two letters, one sound)
+/tʃ/	ch.mp3	tʃ	ch	chip, much, chin	Consonant digraphs (two letters, one sound)
+/θ/	th.mp3	θ	th (unvoiced)	thin, think, bath	Consonant digraphs (two letters, one sound)
+/ð/	th_voiced.mp3	ð	th (voiced)	this, that, with	Consonant digraphs (two letters, one sound)
+/k/	k.mp3	k	ck	back, duck, lock	Consonant digraphs (two letters, one sound)
+/ŋ/	ng.mp3	ŋ	ng	ring, song, long	Consonant digraphs (two letters, one sound)
+/w/	w.mp3	w	wh	when, what, where	Consonant digraphs (two letters, one sound)
+/f/	f.mp3	f	ph	phone, photo	Consonant digraphs (two letters, one sound)
+/æ/	a_short.mp3	æ	a	cat, bag, map	Short vowel sounds
+/ɛ/	e_short.mp3	ɛ	e	bed, pen, ten	Short vowel sounds
+/ɪ/	i_short.mp3	ɪ	i	sit, pin, him	Short vowel sounds
+/ɑ/	o_short.mp3	ɑ	o	hot, dog, box	Short vowel sounds
+/ʌ/	u_short.mp3	ʌ	u	cup, run, bus	Short vowel sounds
+/eɪ/	ai.mp3	eɪ	a_e	cake, name, lake	Long vowel sounds and vowel teams
+/eɪ/	ai.mp3	eɪ	ai / ay	rain, day, sail	Long vowel sounds and vowel teams
+/i/	ee.mp3	i	ee / ea	feet, sea, clean	Long vowel sounds and vowel teams
+/aɪ/	igh.mp3	aɪ	i_e / igh	like, night, time	Long vowel sounds and vowel teams
+/oʊ/	oa.mp3	oʊ	oa / o_e	boat, home, goat	Long vowel sounds and vowel teams
+/u/	oo_long.mp3	u	oo	moon, food, cool	Long vowel sounds and vowel teams
+/ʊ/	oo_short.mp3	ʊ	oo	book, cook, look	Long vowel sounds and vowel teams
+/aʊ/	ow.mp3	aʊ	ou / ow	out, cow, shout	Long vowel sounds and vowel teams
+/ɔɪ/	oy.mp3	ɔɪ	oi / oy	oil, boy, coin	Long vowel sounds and vowel teams
+/ɝ/	er.mp3	ɝ	er / ir / ur	her, bird, turn	Long vowel sounds and vowel teams
+/ɑr/	ar.mp3	ɑ + r	ar	car, park, star	R-controlled vowels, the schwa and /ʒ/ — the last seven sounds
+/ɔr/	or.mp3	ɔ + r	or / ore	for, corn, more	R-controlled vowels, the schwa and /ʒ/ — the last seven sounds
+/ɔ/	aw.mp3	ɔ	aw / au / al	saw, haul, talk	R-controlled vowels, the schwa and /ʒ/ — the last seven sounds
+/ə/	schwa.mp3	ə	a / e (unstressed)	about, sofa, banana	R-controlled vowels, the schwa and /ʒ/ — the last seven sounds
+/ɪr/	ear.mp3	ɪ + r	ear / eer	ear, near, deer	R-controlled vowels, the schwa and /ʒ/ — the last seven sounds
+/ɛr/	air.mp3	ɛ + r	air / are	air, hair, care	R-controlled vowels, the schwa and /ʒ/ — the last seven sounds
+/ʊə/	ure.mp3	ʊə	ure / our	pure, tour, cure	R-controlled vowels, the schwa and /ʒ/ — the last seven sounds
+/ʒ/	zh.mp3	ʒ	si / su / ge	television, measure, treasure	R-controlled vowels, the schwa and /ʒ/ — the last seven sounds

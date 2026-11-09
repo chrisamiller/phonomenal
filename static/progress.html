@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phonomenal · Progress</title>
+  <link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    body { font-family: system-ui, sans-serif; font-size: 15px; letter-spacing: 0; }
+    #app { max-width: 960px; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+    .stat { background: var(--card); border-radius: 12px; padding: 12px; }
+    .stat b { display: block; font-size: 1.6rem; }
+    .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 8px 14px; border-radius: 10px; background: var(--primary); color: var(--primary-ink); text-decoration: none; font-weight: 600; }
+    .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+    .controls { display: flex; gap: 8px; flex-wrap: wrap; }
+    .controls input, .controls select { font: inherit; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+    .scroll { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; background: var(--card); border-radius: 12px; }
+    th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    th { cursor: pointer; user-select: none; }
+    td.num, th.num { text-align: right; }
+    .pager { display: flex; gap: 8px; align-items: center; justify-content: flex-end; flex-wrap: wrap; }
+    .pager button { font-size: .9rem; padding: 6px 14px; border-radius: 8px; }
+    .pager button:disabled { opacity: .4; cursor: default; }
+    h2 { margin: 12px 0 0; font-size: 1.2rem; }
+  </style>
+</head>
+<body>
+<main id="app">
+  <section class="screen">
+    <p class="row" style="justify-content: space-between"><a href="/">← Back to practice</a><span class="row"><a href="/api/backup" download>⬇ Export backup</a><a href="/logout">Sign out</a></span></p>
+    <h1>Progress</h1>
+    <p class="muted" id="clock"></p>
+    <div class="stats" id="tiles"></div>
+
+    <h2>Word levels</h2>
+    <p id="pace"></p>
+    <div class="scroll"><table><thead><tr><th>Level</th><th class="num">Words</th><th class="num">Introduced</th><th class="num">Mastered</th><th></th></tr></thead><tbody id="levels"></tbody></table></div>
+    <p class="muted" id="upcoming"></p>
+
+    <h2>Writing</h2>
+    <div class="row">
+      <span class="muted" id="writing-info"></span>
+      <a class="btn" href="/api/export/writing">⬇ Export all writing (CSV)</a>
+    </div>
+
+    <h2>Credits economy</h2>
+    <div class="stats" id="eco-tiles"></div>
+    <p class="muted" id="eco-target"></p>
+    <div class="two-col">
+      <div class="scroll"><table><thead><tr><th>Week</th><th class="num">Practice days</th><th class="num">Earned</th><th class="num">Spent</th></tr></thead><tbody id="eco-weeks"></tbody></table></div>
+      <div class="scroll"><table><thead><tr><th>Earned from</th><th class="num">Credits</th></tr></thead><tbody id="eco-sources"></tbody></table></div>
+    </div>
+    <div class="scroll"><table><thead><tr><th>Date</th><th>Bought</th><th class="num">Price</th><th class="num">Days saving</th></tr></thead><tbody id="eco-purchases"></tbody></table></div>
+
+    <h2>Achievements earned</h2>
+    <div class="scroll"><table><thead><tr><th>When</th><th>Achievement</th><th class="num">Credits</th></tr></thead><tbody id="ach"></tbody></table></div>
+
+    <h2>Recent answers</h2>
+    <div class="scroll"><table><thead><tr><th>When</th><th>Word</th><th>Typed</th><th>Result</th></tr></thead><tbody id="recent"></tbody></table></div>
+
+    <h2>All words</h2>
+    <div class="controls">
+      <input id="q" placeholder="Search words">
+      <select id="status-filter">
+        <option value="">All statuses</option><option>new</option><option>due</option><option>learning</option><option>mastered</option>
+      </select>
+      <select id="level-filter"><option value="">All levels</option></select>
+    </div>
+    <div class="scroll"><table>
+      <thead><tr>
+        <th data-k="word">Word</th><th data-k="level" class="num">Level</th><th data-k="status">Status</th><th data-k="reps" class="num">Reviews</th>
+        <th data-k="lapses" class="num">Misses</th><th data-k="streak" class="num">Streak</th>
+        <th data-k="difficulty" class="num">Difficulty</th><th data-k="due_in">Next due</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+    <div class="pager">
+      <span class="muted" id="page-info"></span>
+      <button id="prev">← Prev</button>
+      <button id="next">Next →</button>
+    </div>
+  </section>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const PAGE_SIZE = 50;
+let data = null, sortKey = "difficulty", sortDir = -1, page = 0;
+const fmt = (iso) => iso ? new Date(iso).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "";
+const dueText = (n) => n == null ? "" : n <= 0 ? "due now" : n === 1 ? "next practice day" : `in ${n} practice days`;
+const cell = (text, cls) => { const td = document.createElement("td"); td.textContent = text ?? ""; if (cls) td.className = cls; return td; };
+const row = (...tds) => { const tr = document.createElement("tr"); tr.append(...tds); return tr; };
+
+function render() {
+  const q = $("q").value.toLowerCase(), st = $("status-filter").value, lv = $("level-filter").value;
+  const rows = data.words
+    .filter((w) => (!q || w.word.toLowerCase().includes(q)) && (!st || w.status === st) && (!lv || String(w.level) === lv))
+    .sort((a, b) => {
+      const x = a[sortKey] ?? -Infinity, y = b[sortKey] ?? -Infinity;
+      return (x > y ? 1 : x < y ? -1 : 0) * sortDir;
+    });
+  const pages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+  page = Math.min(page, pages - 1);
+  const start = page * PAGE_SIZE;
+  $("page-info").textContent = rows.length
+    ? `${start + 1}–${Math.min(start + PAGE_SIZE, rows.length)} of ${rows.length} · page ${page + 1} of ${pages}`
+    : "No matching words";
+  $("prev").disabled = page === 0;
+  $("next").disabled = page >= pages - 1;
+  $("rows").replaceChildren(...rows.slice(start, start + PAGE_SIZE).map((w) => row(
+    cell(w.word), cell(w.level, "num"), cell(w.status), cell(w.reps, "num"), cell(w.lapses, "num"),
+    cell(w.streak, "num"), cell(w.difficulty, "num"), cell(dueText(w.due_in)))));
+}
+
+(async () => {
+  data = await (await fetch("/api/progress")).json();
+  const counts = { new: 0, due: 0, learning: 0, mastered: 0 };
+  for (const w of data.words) counts[w.status]++;
+  $("tiles").replaceChildren(...Object.entries(counts).map(([k, v]) => {
+    const d = document.createElement("div"); d.className = "stat";
+    const b = document.createElement("b"); b.textContent = v;
+    d.append(b, k); return d;
+  }));
+  $("recent").replaceChildren(...data.recent.map((r) => row(
+    cell(fmt(r.ts)), cell(r.word), cell(r.typed),
+    cell(r.correct ? `✓ ${r.rating}${r.spot_check ? " (spot check)" : ""}` : "✗ missed"))));
+  $("clock").textContent = data.last_practice_date
+    ? `Practice day ${data.practice_day} · last practised ${data.last_practice_date}. Schedules count practice days only; days off don't count.`
+    : "No practice yet.";
+  drawLevels(data.ranking);
+  render();
+  loadEconomy();
+})();
+
+function drawLevels(r) {
+  if (!r) {
+    $("pace").textContent = "New words follow the word-list order (ranking mode is \"tags\" in settings.toml).";
+    return;
+  }
+  const p = r.pace;
+  $("pace").textContent = (p.level ? `Working on level ${p.level} of ${r.levels.length}. ` : "Every word has been introduced. ") +
+    (p.reason || "New words at the normal pace.") +
+    (p.accuracy != null ? ` Recent words right on the last try: ${Math.round(p.accuracy * 100)}% (${p.recent} words).` : "") +
+    (r.unranked ? ` ${r.unranked} words aren't ranked yet; run rank-words.` : "");
+  $("levels").replaceChildren(...r.levels.map((l) => {
+    const tr = row(cell(l.level), cell(l.words, "num"), cell(l.introduced, "num"), cell(l.mastered, "num"),
+      cell(l.level === p.level ? "← current" : l.skipped ? "skipped (too easy)" : "", "muted"));
+    tr.style.cursor = "pointer";
+    tr.title = "Show this level's words";
+    tr.onclick = () => { $("level-filter").value = String(l.level); firstPage(); $("rows").scrollIntoView(); };
+    return tr;
+  }));
+  $("level-filter").append(...r.levels.map((l) => Object.assign(document.createElement("option"), { value: l.level, textContent: `Level ${l.level}` })));
+  $("upcoming").textContent = r.upcoming.length
+    ? "Next new words: " + r.upcoming.map((u) => u.word).join(", ") : "";
+}
+
+function statTile(label, value) {
+  const d = document.createElement("div"); d.className = "stat";
+  const b = document.createElement("b"); b.textContent = value;
+  d.append(b, label); return d;
+}
+const emptyRow = (cols, text) => row(Object.assign(cell(text, "muted"), { colSpan: cols }));
+
+async function loadEconomy() {
+  const e = await (await fetch("/api/economy")).json();
+  $("eco-tiles").replaceChildren(
+    statTile("balance", e.balance), statTile("earned", e.earned_total), statTile("spent", e.spent_total),
+    statTile("per practice day", e.avg_per_practice_day), statTile("per week (last 4)", e.avg_per_week_recent),
+    statTile("missions done", e.missions.length));
+  const t = e.most_expensive_unowned;
+  $("eco-target").textContent = t
+    ? `Most expensive item not yet owned: ${t.item} (${t.price}). ` +
+      (t.weeks_to_afford == null ? "Not enough history to estimate." : `About ${t.weeks_to_afford} weeks to afford at the current rate.`)
+    : "";
+  $("eco-weeks").replaceChildren(...(e.weeks.length ? e.weeks.slice().reverse().map((w) =>
+    row(cell(w.week), cell(w.practice_days, "num"), cell(w.earned, "num"), cell(w.spent, "num"))) : [emptyRow(4, "No credits yet")]));
+  $("eco-sources").replaceChildren(...(Object.keys(e.by_source).length ? Object.entries(e.by_source).map(([k, v]) =>
+    row(cell(k.replace("_", " ")), cell(v, "num"))) : [emptyRow(2, "No credits yet")]));
+  $("eco-purchases").replaceChildren(...(e.purchases.length ? e.purchases.slice().reverse().map((p) =>
+    row(cell(p.date), cell(p.item), cell(p.price, "num"), cell(p.days_saving, "num"))) : [emptyRow(4, "Nothing bought yet")]));
+  $("ach").replaceChildren(...(e.achievements.length ? e.achievements.map((a) =>
+    row(cell(fmt(a.ts)), cell(a.name + (a.tier ? ` (${a.tier})` : "")), cell(a.credits, "num"))) : [emptyRow(3, "None yet")]));
+  const w = await (await fetch("/api/export/writing")).text();
+  const n = Math.max(0, w.trim().split("\n").length - 1);
+  $("writing-info").textContent = n ? "Writing responses saved. Download them as a spreadsheet:" : "No writing yet.";
+}
+const firstPage = () => { page = 0; render(); };
+$("q").oninput = firstPage;
+$("status-filter").onchange = firstPage;
+$("level-filter").onchange = firstPage;
+$("prev").onclick = () => { page--; render(); };
+$("next").onclick = () => { page++; render(); };
+for (const th of document.querySelectorAll("th[data-k]")) th.onclick = () => {
+  sortDir = sortKey === th.dataset.k ? -sortDir : 1; sortKey = th.dataset.k; firstPage();
+};
+</script>
+</body>
+</html>

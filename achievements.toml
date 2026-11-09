@@ -1,0 +1,357 @@
+# Achievements. Each fires once (per tier), shows a pop-up, and awards `credits`.
+# `rule.counter` names a stat computed in app/achievements.py; `at_least` or `tiers` set the thresholds.
+# Hidden achievements aren't shown on the trophy shelf until earned.
+
+# --- Showing up ---
+[[achievement]]
+id = "first-splash"
+name = "First Splash"
+description = "Complete your first daily mission."
+rule = { counter = "missions_completed", at_least = 1 }
+credits = 10
+
+[[achievement]]
+id = "five-alive"
+name = "Five Alive"
+description = "Reach your weekly goal."
+rule = { counter = "weekly_goals_met", tiers = [1, 4, 10, 25] }
+credits = 26
+
+[[achievement]]
+id = "monthly-regular"
+name = "Monthly Regular"
+description = "Reach your weekly goal 4 weeks in a row."
+rule = { counter = "goal_week_streak", at_least = 4 }
+credits = 40
+
+[[achievement]]
+id = "perfect-week"
+name = "Perfect Week"
+description = "Complete a mission all 7 days of a week."
+rule = { counter = "perfect_weeks", at_least = 1 }
+credits = 40
+
+[[achievement]]
+id = "comeback-kid"
+name = "Comeback Kid"
+description = "Practise on your first day back after a break of a week or more."
+rule = { counter = "comeback_missions", at_least = 1 }
+credits = 16
+
+[[achievement]]
+id = "weekend-warrior"
+name = "Weekend Warrior"
+description = "Complete a mission on a Saturday or Sunday."
+rule = { counter = "weekend_missions", at_least = 1 }
+credits = 10
+
+[[achievement]]
+id = "early-bird"
+name = "Early Bird"
+description = "Complete a mission before 8 a.m."
+rule = { counter = "early_missions", at_least = 1 }
+credits = 10
+
+[[achievement]]
+id = "night-owl"
+name = "Night Owl"
+description = "Complete a mission after 7 p.m."
+rule = { counter = "late_missions", at_least = 1 }
+credits = 10
+
+# --- Day streaks (earned again with every new streak) ---
+[[achievement]]
+id = "on-a-roll"
+name = "On a Roll"
+description = "Complete missions 3 days in a row."
+rule = { counter = "streaks_3", at_least = 1 }
+credits = 10
+repeatable = true
+
+[[achievement]]
+id = "high-five"
+name = "High Five"
+description = "Complete missions 5 days in a row."
+rule = { counter = "streaks_5", at_least = 1 }
+credits = 20
+repeatable = true
+
+[[achievement]]
+id = "week-long-streak"
+name = "Week-Long Streak"
+description = "Complete missions 7 days in a row."
+rule = { counter = "streaks_7", at_least = 1 }
+credits = 30
+repeatable = true
+
+[[achievement]]
+id = "two-week-streak"
+name = "Two-Week Streak"
+description = "Complete missions 14 days in a row."
+rule = { counter = "streaks_14", at_least = 1 }
+credits = 50
+repeatable = true
+
+[[achievement]]
+id = "unstoppable"
+name = "Unstoppable"
+description = "Complete missions 30 days in a row."
+rule = { counter = "streaks_30", at_least = 1 }
+credits = 100
+repeatable = true
+
+# --- Spelling ---
+[[achievement]]
+id = "word-collector"
+name = "Word Collector"
+description = "Master words."
+rule = { counter = "words_mastered", tiers = [10, 50, 100, 250, 500, 1000] }
+credits = 20
+
+[[achievement]]
+id = "back-from-the-brink"
+name = "Back from the Brink"
+description = "Master a word that was once one of your hardest."
+rule = { counter = "brink_words", at_least = 1 }
+credits = 20
+
+[[achievement]]
+id = "rematch-champion"
+name = "Rematch Champion"
+description = "Win rematches against words you missed before."
+rule = { counter = "rematches_won", tiers = [5, 25, 100] }
+credits = 16
+
+[[achievement]]
+id = "never-give-up"
+name = "Never Give Up"
+description = "Spell a word correctly that you had missed 3 or more times."
+rule = { counter = "never_give_up", at_least = 1 }
+credits = 16
+
+[[achievement]]
+id = "homophone-hero"
+name = "Homophone Hero"
+description = "Spell every word in a sound-alike set (like their/there/they’re) correctly in one week."
+rule = { counter = "homophone_set_weeks", at_least = 1 }
+credits = 20
+
+[[achievement]]
+id = "hot-streak"
+name = "Hot Streak"
+description = "Get 10 words right on the first try in a row."
+rule = { counter = "first_try_streak", at_least = 10 }
+credits = 16
+
+[[achievement]]
+id = "alphabet-explorer"
+name = "Alphabet Explorer"
+description = "Spell a word starting with every letter from A to Z."
+rule = { counter = "alphabet_letters", at_least = 26 }
+credits = 30
+
+[[achievement]]
+id = "capital-idea"
+name = "Capital Idea"
+description = "Spell 10 words that start with a capital letter."
+rule = { counter = "capitals_spelled", at_least = 10 }
+credits = 16
+
+[[achievement]]
+id = "contraction-crusher"
+name = "Contraction Crusher"
+description = "Spell every contraction (like can’t and won’t) correctly."
+rule = { counter = "contractions_complete", at_least = 1 }
+credits = 20
+
+# --- Writing ---
+[[achievement]]
+id = "first-draft"
+name = "First Draft"
+description = "Finish your first writing prompt."
+rule = { counter = "writing_responses", at_least = 1 }
+credits = 10
+
+[[achievement]]
+id = "wordsmith"
+name = "Wordsmith"
+description = "Write lots of words in total."
+rule = { counter = "words_written", tiers = [1000, 5000, 10000] }
+credits = 26
+
+[[achievement]]
+id = "storyteller"
+name = "Storyteller"
+description = "Answer 10 writing prompts."
+rule = { counter = "writing_responses", at_least = 10 }
+credits = 16
+
+[[achievement]]
+id = "big-thinker"
+name = "Big Thinker"
+description = "Write 6 or more sentences in one response."
+rule = { counter = "max_response_sentences", at_least = 6 }
+credits = 10
+
+[[achievement]]
+id = "daily-diarist"
+name = "Daily Diarist"
+description = "Write on 5 different days in one week."
+rule = { counter = "writing_week_days", at_least = 5 }
+credits = 20
+
+[[achievement]]
+id = "wide-vocabulary"
+name = "Wide Vocabulary"
+description = "Use 50 different long words (7+ letters) in your writing."
+rule = { counter = "long_words_used", at_least = 50 }
+credits = 20
+
+[[achievement]]
+id = "question-master"
+name = "Question Master"
+description = "Answer a prompt from every category."
+rule = { counter = "prompt_categories_complete", at_least = 1 }
+credits = 20
+
+# --- Sound splitting ---
+[[achievement]]
+id = "sound-detective"
+name = "Sound Detective"
+description = "Split words into their sounds."
+rule = { counter = "words_split", tiers = [25, 100, 500] }
+credits = 16
+
+[[achievement]]
+id = "pattern-pro"
+name = "Pattern Pro"
+description = "Get every vowel-team word right in one sound-splitting session."
+rule = { counter = "vowel_team_perfect_sessions", at_least = 1 }
+credits = 16
+
+# --- Sound match ---
+[[achievement]]
+id = "ear-for-it"
+name = "Ear for It"
+description = "Get 20 sound-match cards right in a row."
+rule = { counter = "match_streak", at_least = 20 }
+credits = 20
+
+[[achievement]]
+id = "same-letters-different-sound"
+name = "Same Letters, Different Sound"
+description = "Spot trick words that look like a match but sound different."
+rule = { counter = "lookalikes_rejected", tiers = [15, 50, 100, 300, 1000] }
+credits = 16
+
+[[achievement]]
+id = "sound-spectrum"
+name = "Sound Spectrum"
+description = "Get a sound-match round right for every sound."
+rule = { counter = "all_sounds_covered", at_least = 1 }
+credits = 30
+
+# --- Aquarium ---
+[[achievement]]
+id = "first-fish"
+name = "First Fish"
+description = "Add your first fish to the aquarium."
+rule = { counter = "fish_owned", at_least = 1 }
+credits = 6
+
+[[achievement]]
+id = "school-of-fish"
+name = "School of Fish"
+description = "Have 10 fish in your aquarium."
+rule = { counter = "fish_owned", at_least = 10 }
+credits = 20
+
+[[achievement]]
+id = "full-reef"
+name = "Full Reef"
+description = "Own one of every coral."
+rule = { counter = "corals_complete", at_least = 1 }
+credits = 26
+
+[[achievement]]
+id = "collectors-edition"
+name = "Collector's Edition"
+description = "Own the whale shark."
+rule = { counter = "whale_shark", at_least = 1 }
+credits = 26
+
+[[achievement]]
+id = "big-spender"
+name = "Big Spender"
+description = "Buy something that costs 300 credits or more."
+rule = { counter = "max_purchase", at_least = 300 }
+credits = 10
+
+[[achievement]]
+id = "saver"
+name = "Saver"
+description = "Save up 500 credits."
+rule = { counter = "max_balance", at_least = 500 }
+credits = 16
+
+[[achievement]]
+id = "interior-designer"
+name = "Interior Designer"
+description = "Rearrange your aquarium 10 times."
+rule = { counter = "rearrangements", at_least = 10 }
+credits = 10
+
+[[achievement]]
+id = "fresh-start"
+name = "Fresh Start"
+description = "Archive your first project and start a new one."
+rule = { counter = "projects_archived", at_least = 1 }
+credits = 20
+
+[[achievement]]
+id = "gallery-opening"
+name = "Gallery Opening"
+description = "Archive two finished projects."
+rule = { counter = "projects_archived", at_least = 2 }
+credits = 26
+
+# --- Hidden surprises ---
+[[achievement]]
+id = "lucky-13"
+name = "Lucky 13"
+description = "Complete your 13th mission."
+rule = { counter = "missions_completed", at_least = 13 }
+credits = 14
+hidden = true
+
+[[achievement]]
+id = "palindrome"
+name = "Palindrome"
+description = "Spell a word that reads the same backwards, like 'level'."
+rule = { counter = "palindromes", at_least = 1 }
+credits = 10
+hidden = true
+
+[[achievement]]
+id = "marathon"
+name = "Marathon"
+description = "Do every activity in one day."
+rule = { counter = "all_activities_days", at_least = 1 }
+credits = 20
+hidden = true
+
+[[achievement]]
+id = "anniversary"
+name = "Anniversary"
+description = "Practise on the one-year anniversary of your first mission."
+rule = { counter = "anniversary", at_least = 1 }
+credits = 50
+hidden = true
+
+[[achievement]]
+id = "fish-whisperer"
+name = "Fish Whisperer"
+description = "Tap the same fish 10 times in a row."
+rule = { counter = "fish_whisperer", at_least = 1 }
+credits = 6
+hidden = true

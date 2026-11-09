@@ -1,0 +1,146 @@
+# Spelling practice settings. Changes take effect on the next session (no restart needed).
+
+[session]
+size = 25                 # target number of words per session
+easy_fraction = 0.5       # well-known words: confidence builders
+medium_fraction = 0.3
+challenge_fraction = 0.2  # hard words + brand new words
+max_new_per_session = 6
+max_new_per_day = 12
+max_spot_checks = 2       # mastered words re-checked as easy filler when a session is short
+top_up_with_new = true    # if still short, fill the session with extra new words (beyond the daily limit)
+welcome_back_after_days = 7  # after a break this long (calendar days), the first practice day is review-first
+
+# Only used when [ranking] mode = "tags": new words come from these tags first, in this order.
+new_word_order = [
+  "custom-words",
+  "level-a-spelling-vocab-w-audio-v2",
+  "level-b-english-spelling-vocab-w-audio",
+  "spellquiz-grade-1",
+  "spellquiz-grade-2",
+  "spellquiz-grade-3",
+  "spellquiz-grade-4",
+  "spellquiz-grade-5",
+  "advanced-spelling-words",
+]
+
+[ranking]
+# How new words are chosen. "level": easiest first, by computed spelling difficulty
+# (run `python -m app.cli rank-words` after changing anything below). "tags": by new_word_order.
+mode = "level"
+levels = 10
+start_level = 3              # new words start at this level; easier ones are skipped (words already practised still come back)
+priority_tags = ["custom-words"]  # her own words: up to priority_per_session of them each session, whatever their level
+priority_per_session = 1
+preview_fraction = 0.2       # share of new words taken from harder levels (once the current level is solid)
+preview_max_level = 6        # those stretch words rotate through the levels above hers, up to this one
+max_heart_per_session = 1    # irregular "heart" words (said, was, laugh…)
+homophone_gap_days = 7       # practice days between introducing a word and its homophone (there / their)
+
+# Pacing: slow down new words when recent answers show she's struggling.
+pace_window_days = 7         # look at words reviewed in the last N practice days
+pace_min_reviews = 10        # …once there are at least this many
+pace_slow_below = 0.75       # share answered right on the last try below this: half as many new words
+pace_stop_below = 0.6        # below this: no new words until reviews recover
+level_ready = 0.8            # the previous level's words must be this right before the next level opens fully
+
+[ranking.weights]
+syllables = 1.0     # per syllable after the first
+surprise = 0.35     # per bit of spelling surprise (unexpected letter patterns)
+suffix = 0.8        # per suffix rule (running, making, cried)
+letters = 0.12      # per letter
+rarity = 0.5        # per point below an everyday word's frequency
+grade = 0.35        # per grade above 1, from the word lists below
+
+[ranking.tag_grades]
+# The grade each word list is aimed at; a word in several lists uses the lowest.
+"level-a-spelling-vocab-w-audio-v2" = 1
+"spellquiz-grade-1" = 1
+"spellquiz-grade-2" = 2
+"spellquiz-grade-3" = 3
+"level-b-english-spelling-vocab-w-audio" = 3
+"spellquiz-grade-4" = 4
+"spellquiz-grade-5" = 5
+"advanced-spelling-words" = 5
+"ufli-phase-1" = 1
+"ufli-phase-2" = 1
+"ufli-phase-3" = 1
+"ufli-phase-4" = 1
+"ufli-phase-5" = 1
+"ufli-phase-6" = 1
+"ufli-phase-7" = 2
+"ufli-phase-8" = 2
+"ufli-phase-9" = 2
+"ufli-phase-10" = 2
+"ufli-phase-11" = 2
+"sound-match-extras" = 2
+
+[difficulty]
+# FSRS difficulty runs 1 (trivial) to 10 (very hard).
+easy_below = 4.0
+hard_at_or_above = 6.5
+
+# All intervals below are in *practice days*: days the child actually practised.
+# Days off (weekends, vacations) don't count, so nothing piles up while you're away.
+
+[scheduler]
+desired_retention = 0.9   # higher = more frequent reviews
+maximum_interval_days = 365
+
+# What each button after a correct answer means to the scheduler (Again/Hard/Good/Easy).
+# A wrong answer is always "Again".
+[ratings]
+easy = "Easy"
+little_hard = "Good"
+guessed = "Hard"
+
+[mastery]
+min_streak = 3              # consecutive correct (first-try) answers
+min_stability_days = 60     # FSRS memory stability needed
+spot_check_after_days = 60  # mastered words become eligible for an occasional spot check
+easy_on_first_sight = true  # right on the very first try and rated easy: mastered at once, never shown again (no spot checks)
+
+[grading]
+strict_case = false         # if false, "january" counts as correct but shows a capital-letter reminder
+
+[practice]
+cover_and_write = true      # after a miss: look at the word, cover it, write it again (not scored)
+
+[audio]
+# Clips made by these engines are queued to be replaced (see `python -m app.cli audio-queue`).
+replace_sources = ["macos-say"]
+
+[mission]
+weekly_goal = 5                 # mission days per week (Monday to Sunday)
+extras = ["writing", "split", "match"]   # activities she can add to spelling
+min_extras = 1
+max_extras = 2
+
+# Credits are for effort, never accuracy. See the economy report on the progress page.
+[credits]
+activity = 20       # first time each activity is finished each day
+activity_repeat = 10 # playing an activity again the same day (bonus practice)
+repeat_daily_cap = 100  # most bonus-practice credits per day (0 = no limit)
+mission = 40        # all of today's chosen activities finished
+weekly_goal = 100
+rematch = 10        # a previously-missed word spelled right on the first try
+correct_word = 2    # each spelling word right on the first try (no separate bonus for mastering a word)
+
+[writing]
+no_repeat_days = 30
+min_sentences = 3
+min_words = 30      # alternative to the sentence count, for run-on writing
+
+[split]
+words_per_session = 10
+
+[match]
+rounds_per_session = 6
+cards_per_round = 8
+
+[auth]
+# The sign-in page. The password isn't kept here: set SPELLING_PASSWORD in the environment
+# (on Cloud Run it comes from Secret Manager). With no password set, nobody can sign in.
+# SPELLING_USERNAME / SPELLING_SECRET_KEY override the name and the cookie-signing key.
+username = "Lexi"
+password = ""
